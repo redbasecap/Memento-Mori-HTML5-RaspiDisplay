@@ -1,0 +1,186 @@
+/**
+ * Memento Mori Calendar - Styles
+ * 
+ * A minimalist design system focused on readability and visual impact,
+ * using a monochromatic color scheme to represent the progression of time.
+ */
+
+/* =========================================
+   Font Configuration
+   ========================================= */
+
+/* Geist font with progressive loading strategy */
+@font-face {
+  font-family: 'Geist';
+  src: url('fonts/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* Ensures text remains visible during font loading */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('fonts/Geist-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('fonts/Geist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variable font for optimal performance and flexibility */
+@font-face {
+  font-family: 'Geist';
+  src: url('fonts/Geist[wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================
+   Design Tokens & Theme Variables
+   ========================================= */
+
+:root {
+  /* Grid configuration for calendar layout */
+  --rows-per-rect: 10;
+  --cols-per-rect: 26;
+
+  /* Color palette */
+  --color-dark-gray: #333;
+  --color-black: #000;
+  --color-white: #fff;
+  
+  /* Spacing system */
+  --rect-gap: 10px;
+  --week-gap: 5px;
+  --week-size: 10px;
+  
+  /* Typography */
+  --font-family: 'Geist', sans-serif;
+}
+
+/* =========================================
+   Animations
+   ========================================= */
+
+/* Blinking animation for the last filled week */
+@keyframes slow-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+.week-cell.last-filled {
+  animation: slow-blink 5s ease-in-out infinite; /* Smooth, continuous animation */
+}
+
+/* =========================================
+   Print Configuration
+   ========================================= */
+
+@page {
+  size: a4 portrait; /* Standard paper size for printing */
+}
+
+@media print {
+  .week-cell {
+    -webkit-print-color-adjust: exact; /* Ensures colors print as displayed */
+  }
+}
+
+/* =========================================
+   Base Styles
+   ========================================= */
+
+body {
+  font-family: var(--font-family);
+}
+
+.title {
+  color: var(--color-dark-gray);
+  font-size: 50px;
+  font-weight: 700;
+  margin: 0 0 25px;
+  text-align: center;
+  font-family: var(--font-family);
+}
+
+#quote {
+  margin: 60px auto;
+  max-width: 880px; /* Optimized for readability */
+  padding: 0 1rem;
+  width: calc(100% - 2rem); /* Responsive with padding consideration */
+}
+
+.whitespace {
+  height: 30px; /* Consistent vertical rhythm */
+}
+
+/* =========================================
+   Calendar Grid Layout
+   ========================================= */
+
+#calendar {
+  /* https://github.com/afonsocrg/mementoMori/issues/1 */
+  /* width: 0px; */ /* make it fit its content. TODO: calculate it dynamically */
+  display: grid;
+  grid-gap: var(--rect-gap);
+  grid-template-columns: repeat(2, auto); /* Two-column layout for decade pairs */
+  width: 90vw; /* Responsive width based on viewport */
+}
+
+/* Responsive adjustments for screen display */
+@media screen {
+  #calendar {
+    justify-content: center; /* Center grid horizontally */
+    margin: auto;
+  }
+}
+
+/* Rectangle container - groups weeks by decade sections */
+.rect-container {
+  display: grid;
+  grid-gap: var(--week-gap);
+  grid-template-columns: repeat(var(--cols-per-rect), auto);
+}
+
+/* Individual week cell styling */
+.week-cell {
+  border: 1px solid var(--color-dark-gray);
+  height: var(--week-size);
+  width: var(--week-size);
+}
+
+/* =========================================
+   UI Controls
+   ========================================= */
+
+.download {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.download button {
+  background-color: var(--color-black);
+  color: #fff;
+  width: 15em;
+  height: 3em;
+  border: 1px solid var(--color-dark-gray);
+  border-radius: 0.5em;
+  margin-bottom: 20px;
+  transition: background-color 0.5s, color 0.5s; /* Smooth hover effect */
+}
+
+.download button:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color: var(--color-black);
+}
