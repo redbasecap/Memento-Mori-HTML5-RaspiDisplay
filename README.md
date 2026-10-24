@@ -24,7 +24,7 @@ The calendar is built with clean HTML5, CSS3, and vanilla JavaScript, featuring 
 
 ## Usage
 
-Simply open the HTML file in a browser. The calendar automatically calculates weeks from the birthdate defined in the JavaScript file.
+Set your birthdate (`dd/mm/yyyy`) in the `BIRTHDATE` constant at the top of `script.js`, then open `index.html` in a browser. The calendar automatically calculates the weeks lived from that date (the default `01/01/1999` is only a demo value).
 
 ## License
 

@@ -158,6 +158,20 @@ body {
   width: var(--week-size);
 }
 
+/* Smaller screens (e.g. the 800x480 Raspberry Pi touch display): scale the
+   52-week rows to fit 90vw instead of overflowing horizontally */
+@media screen and (max-width: 920px) {
+  :root {
+    --rect-gap: 6px;
+    --week-gap: 2px;
+    --week-size: calc((90vw - 6px - 50 * 2px) / 52 - 2px);
+  }
+
+  .title {
+    font-size: 36px;
+  }
+}
+
 /* =========================================
    UI Controls
    ========================================= */

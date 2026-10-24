@@ -22,8 +22,11 @@ let numDecades = Math.floor(life_expectancy / 10);
 // Initialize calendar structure
 populate_calendar(numDecades);
 
-// Fill calendar with a birthdate (default for demonstration)
-/* fill_calendar("01/01/1999"); */
+// Birthdate in dd/mm/yyyy format - change this to your own
+const BIRTHDATE = "01/01/1999";
+
+// Fill calendar with weeks lived since the birthdate
+fill_calendar(BIRTHDATE);
 
 /**
  * Fills each week cell based on birthdate until current date
@@ -185,7 +188,8 @@ function get_css_variable(name) {
  * Calendar download functionality
  * Uses html2canvas to convert the calendar to a downloadable image
  */
-document.getElementById("downloadBtn").addEventListener("click", () => {
+const downloadBtn = document.getElementById("downloadBtn");
+if (downloadBtn) downloadBtn.addEventListener("click", () => {
     html2canvas(document.querySelector(".content")).then((canvas) => {
         // Create download link
         let anchorTag = document.createElement("a");
